@@ -9,66 +9,60 @@
    
     <body>
         <article>
-            <h1>TODO list 📝</h1>
+            <h1 class="add_task_1">TODO list 📝</h1>
+            <button class="add_task_1 add_task ">add task ➕</button>
         </article>
         <section class="catalogs">
             <div class="catalog TODO">
-                <p>😥omg! you have tasks</p>
-                <div id="tasks" class="tasks">
-                    <!-- <div class="task">
-                    <select  name="selected" id="select">
-                        <option value="">status :</option>
-                        <option value="todo">todo ❌</option>
-                        <option value="doing">doing 🔄️</option>
-                        <option value="done">done ✅</option>
-                    </select>
-                    <button class="status_btn btn">❌</button>
-                    <br>
-                    <h1 class="task_title">name of task</h1>
-                    <p part="Task_description">Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>20/11/2024 ⌛</p>
-                    <br>
-                    <button class="modification_btn btn">✏️</button>
-                    <button class="supression_btn btn">🚮</button>
-                    </div> -->
+                <h2>😥omg! you have tasks</h2>
+                <div class="count_all"><p class="count_p"> you have <p class="count_todo"></p> tasks</p></div>
+                <div id="todo" class="tasks">
+                    
                 </div>
                 
             </div>
             <div class="catalog DOING">
-                <p>😃good work you already do it</p>
+                
+                <h2>😃good ! you already do it</h2>
+                <div class="count_all"><p class="count_p"> you have <p class="count_doing"></p> tasks</p></div>
+                <div id="doing" class="tasks">
+
+                </div>
                 
             </div>
             <div class="catalog DONE">
-                <p>😮‍💨finaly we done owr task</p>
+                <h2>😮‍💨finaly ! we done owr task</h2>
+                <div class="count_all"><p class="count_p"> you have <p class="count_done"></p> tasks</p></div>
+                <div id="done" class="tasks">
+
+                </div>
             </div>
         </section>
         <form id="form" class="form" >
             <h3>add task</h3>
             <div>
-                <label for="name">name of task :</label>
-                <input type="text" placeholder="name">
+                <label>name of task :</label>
+                <input id="name" type="text" placeholder="name">
             </div>
+                <label>description of task :</label>
+                <div><textarea id="description" type="text" placeholder="description"></textarea></div>
             <div>
-                <label for="name">description of task :</label>
-                <input type="text" placeholder="description">
+                <label>date of task :</label>
+                <input id="date" class="date" type="date">
             </div>
-            <div>
-                <label for="name">date of task :</label>
-                <input type="date">
-            </div>
-            <select name="" id="">
-                <option value="">status :</option>
-                <option value="todo">todo</option>
-                <option value="doing">doing</option>
-                <option value="done">done</option>
-            </select>
-            <select name="" id="">
-                <option value="">important :</option>
-                <option value="red">red</option>
-                <option value="blue">blue</option>
-                <option value="green">green</option>
-            </select>
-
+                <select class="select" name="status" id="status_select">
+                   
+                    <option value="todo" name="status">todo</option>
+                    <option value="doing" name="status">doing</option>
+                    <option value="done" name="status">done</option>
+                </select>
+                <select  class="select" name="important" id="important_select">
+                   
+                    <option value="red" name="important">red</option>
+                    <option value="blue" name="important">blue</option>
+                    <option value="green" name="important">green</option>
+                </select>
+            <div class="div_submit_btn"><button class="submit_btn" type="submit">add new task</button></div>
             
         </form>
         <script src="assets/js/main.js"></script>

@@ -17,6 +17,7 @@ body{
     border-radius: 5px;
 }
 .catalogs{
+height: auto;
  display: grid;
  grid-template-columns: 3;
  gap: 2vw;
@@ -26,13 +27,15 @@ body{
 }
 .catalog{
     background: linear-gradient(#6c3dbd, #95a3d0);
-    width: 28vw;
-    height: 75vw;
+    width: 100%;
+    height: 50%;
     border-radius: 10px;
-    overflow: hidden;
+    overflow-y: hidden;
     overflow-y: scroll;
-
-    
+}
+#todo{
+    width: 28vw;
+    height: 65vw;
 }
 
 .TODO{
@@ -50,15 +53,14 @@ body{
 .task{
     border: solid black 2px;
     margin: 0px 20px;
+    height: 30%;
     border-radius: 20px;
     position: relative;
     cursor:all-scroll;
+    margin-bottom: 20px;
+    
 }
-.tasks{
-    display: grid;
-    grid-template-rows: auto;
-    gap: 3vw;
-}
+
 .btn{
     background: rgba(0,0,0,0);
     border: none;
@@ -70,6 +72,8 @@ body{
     bottom: 0;
     right: 0px;
     font-size: larger;
+    background: #fff;
+    border-radius: 20px 0px 20px 0px ;
 }
 .status_btn{
     display: block;
@@ -79,34 +83,162 @@ body{
     bottom: 0;
     left: 0px;
     font-size: larger;
+    background:#fff;
+    border-radius: 0px 20px 0px 20px ;
 }
 #select{
     border: none;
     background:#caa5e1;
     cursor: pointer;
+    display: block;
 }
 .form{
     position: absolute;
     top:100px;
-    left: 150px;
+    right: 0px;
     background: #90ecec;
-    width: 50vw;
-    height: 70vw;
+    width: 30%;
+    height: 90%;
     border-radius: 10px;
     color: black;
     text-align: center;
+
 }
 label{
     display: block;
-    margin-bottom: 1vw;
-    margin-top: 2vw;
+    margin-bottom: 3%;
+    margin-top: 3%;
     font-size: medium;
 }
 input{
     border-radius: 10px;
     border: none;
     outline: none;
-    height: 5vw;
+    width: 70%;
+    height: 35px;
     font-size: medium;
     text-align: center;
+    transition: background-color 0.7s;
+}
+input:hover{
+        background: #cdf5cd;
+
+}
+
+.select{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+#status_select{
+    width: 100px;
+    margin-bottom: 1em;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 2px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.7s;
+}
+#status_select:hover{
+    background: #cdf5cd;
+}
+#important_select{
+    
+    width: 100px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 2px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.7s;
+}
+#important_select:hover{
+    background: #cdf5cd;
+}
+.date{
+    font-size: 1.2rem;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 2px;
+}
+.submit_btn{
+    width: 40%;
+    height: 40px;
+    background: #51a5d9;
+    border: none;
+    border-radius: 3px;
+    font-size: large;
+    color: #fff;
+    transition: background-color 0.7s;
+    cursor: pointer;
+}
+.submit_btn:hover{
+    background: #5860fa;
+}
+textarea{
+    width: 70%;
+    height: 70px;
+    resize: none;
+    outline: none;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+h2{
+    font-size: larger;
+}
+.red{
+    background: rgb(255, 215, 215);
+}
+.blue{
+    background: rgb(190, 190, 255);
+}
+.green{
+    background: rgb(230, 255, 230);
+}
+#select_task{
+    border: none;
+    background:#caa5e1;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border-radius: 20px 20px 0px 0px ;
+    border: none;
+    outline: none;
+}
+.tasks{
+    /* display: grid;
+    grid-template-rows: auto;
+    gap: 20px; */
+    height:48rem;
+
+}
+.count_todo,.count_doing,.count_done,.count_p{
+    color: #fff;
+    display: inline;
+    
+}
+.count_all{
+    color: #fff;
+}
+.add_task_1{
+    display: inline;
+}
+article{
+    margin-bottom: 3%;
+    margin-top: 3%;
+    position: relative;
+}
+.add_task{
+    position: absolute;
+    right: 0;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px 50px;
+    background: rgb(73, 73, 135);
+    color: #fff;
+    font-size: large;
+    border: white solid 1.5px;
+    cursor: pointer;
+}
+.add_task:hover{
+    background: blue;
 }
