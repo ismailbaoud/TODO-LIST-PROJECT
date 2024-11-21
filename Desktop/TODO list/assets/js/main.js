@@ -11,7 +11,9 @@ const done = document.getElementById('done');
 const count_todo = document.querySelector('.count_todo');
 const count_doing = document.querySelector('.count_doing');
 const count_done = document.querySelector('.count_done');
-const add_task = document.querySelector('.add_task');
+const add_task = document.getElementById('add_task');
+const div_of_form = document.getElementById("div_of_form")
+const status_btn = document.querySelector('.status_btn')
 
 //declares array
 const arr_tasks = [
@@ -23,6 +25,11 @@ const arr_tasks = [
         important_select:"red"
     }
 ];
+console.log(div_of_form.style.webkitLineClamp)
+add_task.addEventListener('click',()=>{
+    div_of_form.classList.toggle('hidden');
+
+})
 
 //event listner for do some thing
 let task_name;
@@ -50,7 +57,7 @@ form.addEventListener('submit',(e)=>{
     
     arr_tasks.unshift(obg_tasks)
     affichage(arr_tasks)
-    form.style.opacity = '0';
+    div_of_form.classList.toggle('hidden')
 });
 
 function affichage(arr){
@@ -103,7 +110,7 @@ function affichage(arr){
                     ${text}
                     <br>
                     <h1 class="task_title">${element.name}</h1>
-                    <p part="Task_description">${element.description}</p>
+                    <p class="Task_description">${element.description}</p>
                     <p>${element.date} ⌛</p>
                     <br>
                     <button class="modification_btn btn">✏️</button>
@@ -118,12 +125,9 @@ function affichage(arr){
 
 
 }
-add_task.addEventListener('click',()=>{
-    if(form.style.opacity == '0'){
-    form.style.opacity = '1';
-    }
-    else{
-        form.style.opacity = '0';
-    }
-})
+//status_btn eventlistner
+// status_btn.addEventListener('submit',()=>{
+//     console.log('hi');
+// });
+
 affichage(arr_tasks)

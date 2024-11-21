@@ -17,25 +17,25 @@ body{
     border-radius: 5px;
 }
 .catalogs{
-height: auto;
+height: 28rem;
  display: grid;
  grid-template-columns: 3;
  gap: 2vw;
  letter-spacing: 0px;
  font-family: monospace;
  font-size: 1em;
+
 }
 .catalog{
     background: linear-gradient(#6c3dbd, #95a3d0);
     width: 100%;
-    height: 50%;
+    /* height: 50%; */
     border-radius: 10px;
-    overflow-y: hidden;
-    overflow-y: scroll;
+    
 }
 #todo{
-    width: 28vw;
-    height: 65vw;
+    width: 100%;
+    /* height: 65vw; */
 }
 
 .TODO{
@@ -53,7 +53,7 @@ height: auto;
 .task{
     border: solid black 2px;
     margin: 0px 20px;
-    height: 30%;
+    height: 200px;
     border-radius: 20px;
     position: relative;
     cursor:all-scroll;
@@ -67,7 +67,10 @@ height: auto;
     position: absolute;
     cursor: pointer;
 }
-
+.status_btn{
+    background: #fff;
+    border-radius: 0px 0px 20px 0px;
+}
 .supression_btn{
     bottom: 0;
     right: 0px;
@@ -93,9 +96,9 @@ height: auto;
     display: block;
 }
 .form{
-    position: absolute;
+    /* position: absolute;
     top:100px;
-    right: 0px;
+    right: 0px; */
     background: #90ecec;
     width: 30%;
     height: 90%;
@@ -180,6 +183,10 @@ textarea{
     text-align: center;
     border: none;
     border-radius: 10px;
+    transition: background-color 0.7s;
+}
+textarea:hover{
+    background:#cdf5cd;
 }
 h2{
     font-size: larger;
@@ -204,12 +211,17 @@ h2{
     border: none;
     outline: none;
 }
-.tasks{
+/* .tasks{ */
     /* display: grid;
     grid-template-rows: auto;
     gap: 20px; */
-    height:48rem;
+    /* height:48rem; */
 
+/* } */
+.tasks{
+    height: 25rem;
+    overflow-y: hidden;
+    overflow-y: scroll;
 }
 .count_todo,.count_doing,.count_done,.count_p{
     color: #fff;
@@ -241,4 +253,33 @@ article{
 }
 .add_task:hover{
     background: blue;
+}
+.div_of_form{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #050101cb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+ 
+}
+
+.Task_description{
+    width: 90%;
+    /* overflow-x: hidden; */
+    line-break:anywhere;
+    /* line-clamp: 1; */
+    margin: auto;
+}
+/* .fixe{
+    position: sticky;
+} */
+.static{
+    display: static;
+}
+.hidden{
+    display: none;
 }
