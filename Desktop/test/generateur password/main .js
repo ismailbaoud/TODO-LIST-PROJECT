@@ -1,8 +1,13 @@
-const password_length = 12;
+const length_x = document.getElementById('value');
+const btn = document.getElementById('btn');
+const result = document.getElementById('result');
 const include_lower_case = true;
 const include_upper_case = true;
 const include_numbers = true;
 const include_symbols = true;
+let password_length = 8;
+
+
 
 
 function generate_password(password_length , 
@@ -39,10 +44,18 @@ function generate_password(password_length ,
     return password;
 }
 
-const password = generate_password(password_length , 
-    include_lower_case , 
-    include_upper_case , 
-    include_numbers , 
-    include_symbols);
-    console.log(password);
+
     
+btn.addEventListener('click', ()=>{
+        
+
+        password_length = length_x.value;
+        const password = generate_password(password_length , 
+            include_lower_case , 
+            include_upper_case , 
+            include_numbers , 
+            include_symbols);
+            result.textContent = `${password}`
+            
+
+})

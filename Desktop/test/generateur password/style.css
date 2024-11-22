@@ -1,0 +1,37 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+input{
+    text-align: center;
+    width: 10rem;
+    height: 40px;
+}
+span{
+    width: 15rem;
+    height: 30px;
+    background: #000;
+    color: white;
+    font-size: large;
+}
+button{
+    width: 10rem;
+    height: 2rem;
+    background: #74a9da;
+    color: white;
+    font-size: larger;
+    letter-spacing: 2px;
+    border: none;
+    transition: background-color 0.5s;
+}
+button:hover{
+    background: #343793;
+
+}
+button:active{
+    background: #0051ff;
+}
