@@ -27,40 +27,57 @@ const new_Important_select = document.getElementById('new_important_select');
 const boxs = document.querySelectorAll(".dropZone");
 let id_count = 1;
 let drag = null;
+
+function save_Local_storage(arr_tasks) {
+    return localStorage.setItem('todo', JSON.stringify(arr_tasks));
+}
+function get_Local_storage() {
+    return JSON.parse(localStorage.getItem('todo')) || [];
+}
+
 add_task.addEventListener('click',()=>{
     div_of_form.classList.toggle('hidden');
 });
-function dragItem(){
+function dragItem() {
     let items = document.querySelectorAll('#div');
     items.forEach(item => {
-      item.addEventListener('dragstart', function() {
-        drag  = item;
-      })
-      item.addEventListener('dragend', function() {
-        drag = null;
-        })
+        item.addEventListener('dragstart', function () {
+            drag = item;
+        });
+        item.addEventListener('dragend', function () {
+            drag = null;
+        });
         boxs.forEach(box => {
-          box.addEventListener('dragover', function(e){
-            e.preventDefault();
-          })
-          
-          box.addEventListener('drop', function(){
-            this.append(drag);
-            if(box.getAttribute('id') != "todo"){
-              arr_tasks[0].status_select = 'todo';
-            }
-            
-          })
-          
+            box.addEventListener('dragover', function (e) {
+                e.preventDefault();
+            });
+
+            box.addEventListener('drop', function () {
+                this.append(drag);
+                const taskId = parseInt(drag.getAttribute("data-id"));
+                const task = arr_local.find(t => t.id === taskId);
+                if (box.getAttribute('id') === 'doing') {
+                    task.status_select = 'doing';
+                } else if (box.getAttribute('id') === 'done') {
+                    task.status_select = 'done';
+                } else {
+                    task.status_select = 'todo';
+                }
+
+                affichage(arr_local);
+                save_Local_storage(arr_local);
+            });
         });
     });
-  }
+}
 let task_name;
 let description;
 let date ;
 let status_select ;
 let important_select ;
+
 function affichage(arr){
+    
     todo.innerHTML = " ";
     doing.innerHTML = " ";
     done.innerHTML = " ";
@@ -119,13 +136,38 @@ function affichage(arr){
     attachEventListeners()
     
 }
+function checkDate(deathline) {
+    const date = new Date(deathline);
+    const new_year = date.getFullYear();
+    const new_month = date.getMonth() + 1;
+    const new_day = date.getUTCDate();
+  
+    const date_now = new Date();
+    const year = date_now.getFullYear();
+    const month = date_now.getMonth() + 1;
+    const day = date_now.getUTCDate();
+  
+    let test = true;
+  
+    if (year == new_year) {
+      if (month == new_month) {
+        if (day > new_day) {
+          test = false;
+        }
+      } else if (month > new_month) {
+        test = false;
+      }
+    } else if (year > new_year) {
+      test = false;
+    }
+    return test;
+  }
 function clearform() {
     Name.value = "";
     Description.value = "";
     Date_inp.value = "";
-    status_select.value = "";
-    important_select.value = "todo";
   }
+  
 const arr_tasks = [
     {
         name: "ismail",
@@ -136,69 +178,84 @@ const arr_tasks = [
         id:0
     }
 ];
-form.addEventListener('submit',(e)=>{
-    e.preventDefault()
-    task_name = Name.value;
-    description = Description.value;
-    date = Date_inp.value;
-    status_select = Status_select.value;
-    important_select = Important_select.value;
-    const obg_tasks = {
-        name: task_name,
-        description: description,
-        date:date,
-        status_select:status_select,
-        important_select:important_select,
-        id: id_count++
+
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const task_name = Name.value;
+    const description = Description.value;
+    const date = Date_inp.value;
+    const status_select = Status_select.value;
+    console.log(status_select);
+    const important_select = Important_select.value;
+
+    if (task_name === '' || description === '' || date === '') {
+        alert('Please fill in all fields!');
+    } else {
+        const newTask = {
+            name: task_name,
+            description: description,
+            date: date,
+            status_select: status_select,
+            important_select: important_select,
+            id: id_count++
+        };
+
+        arr_local.unshift(newTask);
+        save_Local_storage(arr_local);
+        affichage(arr_local);
+        clearform();
+        div_of_form.classList.toggle('hidden');
+        console.log('hi');
+        
     }
-    if(Name.value == ''){
-        alert('enter your name please!')
-    }else if(Description.value == ''){
-        alert('enter description please!')
-    }else if(Date_inp.value == ''){
-        alert('enter date please!')
-    }
-    else{
-    arr_tasks.unshift(obg_tasks)
-    affichage(arr_tasks)
-    clearform();
-    div_of_form.classList.add('hidden')}
 });
+
 function attachEventListeners() {
     document.querySelectorAll(".supression_btn").forEach((button) => {
         button.addEventListener("click", (event) => {
             const taskElem = event.target.closest("div");
             const idtach = parseInt(taskElem.getAttribute("data-id"));
-            const index = arr_tasks.findIndex((tach) => tach.id === idtach);
+            const index = arr_local.findIndex((tach) => tach.id === idtach);
             if (index !== -1) {
-            arr_tasks.splice(index, 1);
+                arr_local.splice(index, 1);
             }
-            affichage(arr_tasks);
+            affichage(arr_local);
             });
     });
     document.querySelectorAll(".modification_btn").forEach((button) => {
         button.addEventListener("click", (event) => {
             const taskElem = event.target.closest("div");
-            const idtach = parseInt(taskElem.getAttribute("data-id"));
-            add_modification.addEventListener('click',(e)=>{
-                e.preventDefault();
-                arr_tasks[idtach].name = new_Name.value;
-                arr_tasks[idtach].description = new_Description.value;
-                arr_tasks[idtach].date = new_Date_inp.value;
-                arr_tasks[idtach].status_select = new_Status_select.value;
-                arr_tasks[idtach].important_select = new_Important_select.value;
-                div_of_modification.classList.toggle('hidden');
-                affichage(arr_tasks);
-            })
+            const taskId = parseInt(taskElem.getAttribute("data-id"));
+            const task = arr_local.find(t => t.id === taskId);
             
-            div_of_modification.classList.toggle('hidden');
+            if (task) {
+                new_Name.value = task.name;
+                new_Description.value = task.description;
+                new_Date_inp.value = task.date;
+                new_Status_select.value = task.status_select;
+                new_Important_select.value = task.important_select;
+                div_of_modification.classList.toggle('hidden');
+                add_modification.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    task.name = new_Name.value;
+                    task.description = new_Description.value;
+                    task.date = new_Date_inp.value;
+                    task.status_select = new_Status_select.value;
+                    task.important_select = new_Important_select.value;
+                    save_Local_storage(arr_local);
+                    affichage(arr_local);
+                    div_of_modification.classList.toggle('hidden');
+                });
+            }
         });
     });
     document.querySelectorAll(".status_btn").forEach((button) => {
         button.addEventListener("click", (event) => {
             const taskElem = event.target.closest("div");
-            const idtach = parseInt(taskElem.getAttribute("data-id"));
-            const task = arr_tasks.find(task => task.id === idtach);
+            const taskId = parseInt(taskElem.getAttribute("data-id"));
+            const task = arr_local.find(t => t.id === taskId);
+    
             if (task) {
                 if (task.status_select === 'todo') {
                     task.status_select = 'doing';
@@ -207,11 +264,12 @@ function attachEventListeners() {
                 } else {
                     task.status_select = 'todo';
                 }
-                
-                affichage(arr_tasks);
-            };
+                save_Local_storage(arr_local);
+                affichage(arr_local);
+            }
         });
     });
-}
-affichage(arr_tasks);
+}    
+const arr_local = get_Local_storage();
+affichage(arr_local);
                     
